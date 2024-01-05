@@ -1,15 +1,24 @@
+import { ChakraProvider, Card, CardHeader, Input } from "@chakra-ui/react"
+import { DButton } from './Button';
+// import { login } from './services/login';
+
 interface ICard {
-  id: number,
-  paragraph: string,
-  details: string
+  id: string
 }
 
-export const Card = ({ id, paragraph, details }: ICard) => {
+export const DCard = ({ id }: ICard) => {
   return(
-    <div>
-      <h1>Card {id}</h1>
-      <p>{paragraph}</p>
-      <p>{details}</p>
-    </div>
+    <ChakraProvider>
+      <Card id={id} align='center'>
+        <>
+        <CardHeader>
+          Faça o login
+        </CardHeader>
+        <Input placeholder='E-mail'/>
+        <Input placeholder='Senha' />
+        {/* <DButton id='login' onClick={login} text='Entrar'/> */}
+        </>
+      </Card>
+    </ChakraProvider>
   )
 }
