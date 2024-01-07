@@ -27,7 +27,18 @@ function App() {
     //   </Box>
     // </ChakraProvider>
     <Layout>
-      <DCard id='login'/>
+      <Box 
+        w='100%' 
+        minHeight='100vh' 
+        // bg='#2f353a'
+        bg='#1e192c'
+        display='flex'
+        flexWrap='wrap'
+        alignItems='center'
+        justifyContent='center'
+      >
+        <DCard id='login'/>
+      </Box>
     </Layout>
   );
 }
