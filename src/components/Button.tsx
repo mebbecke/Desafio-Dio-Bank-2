@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Center } from '@chakra-ui/react';
 
 interface IButton {
     id: string,
@@ -8,8 +8,16 @@ interface IButton {
 
 export const DButton = ({ id, onClick, text }: IButton) => {
     return (
-        <Button id={id} onClick={onClick} colorScheme='pink' variant='solid' size='sm' margin-top='5px'>
+        <Center marginTop='15px'>
+            <Button 
+            id={id} 
+            onClick={onClick} 
+            colorScheme='pink' 
+            variant='solid' 
+            size='md'
+            >
             {text}
-        </Button>
+            </Button>
+        </Center>
     )
 }

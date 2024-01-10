@@ -1,4 +1,4 @@
-import { ChakraProvider, Card, CardHeader, Heading, Input, Center, CardBody } from "@chakra-ui/react"
+import { ChakraProvider, Card, CardHeader, Heading, Input, CardBody } from "@chakra-ui/react"
 import { DButton } from './Button';
 import { login } from "../services/login";
 
