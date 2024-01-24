@@ -4,7 +4,7 @@ export const Header  = () => {
   return(
     <ChakraProvider>
       <Box 
-        display='flex' 
+        display='flex'
         bg='#151515' 
         padding='15px' 
         color='white' 

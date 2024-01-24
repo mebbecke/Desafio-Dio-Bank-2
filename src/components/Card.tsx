@@ -39,11 +39,11 @@ export const DCard = ({ id }: ICard) => {
         bg='#73818f'
         textColor='white'
       >
-        { 
+        {/* 
         userData === null || userData === undefined ?
         <h1>Loading...</h1> :
         <h1>Informações carregadas.</h1>
-        }
+        */}
         <>
           <CardHeader>
             <Heading size='lg'>Faça o login</Heading>

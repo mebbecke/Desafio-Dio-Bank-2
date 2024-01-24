@@ -1,22 +1,21 @@
-import { Box } from '@chakra-ui/react';
-import { DCard } from './components/Card';
 import { Layout } from './components/Layout';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from './pages/Home';
+import Conta from './pages/Conta';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
-    <Layout>
-      <Box 
-        w='100%' 
-        minHeight='100vh'
-        bg='#1e192c'
-        display='flex'
-        flexWrap='wrap'
-        alignItems='center'
-        justifyContent='center'
-      >
-        <DCard id='login'/>
-      </Box>
-    </Layout>
+    <BrowserRouter>
+      <ChakraProvider>
+        <Layout>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/conta' element={<Conta />} />
+          </Routes>
+        </Layout>
+      </ChakraProvider>
+    </BrowserRouter>
   );
 }
 
