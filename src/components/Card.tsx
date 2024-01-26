@@ -1,33 +1,14 @@
 import { ChakraProvider, Card, CardHeader, Heading, Input, CardBody } from "@chakra-ui/react"
 import { DButton } from './Button';
 import { login } from "../services/login";
-import { useState, useEffect } from 'react';
-import { api } from '../api';
+import { useState } from 'react';
 
 interface ICard {
   id: string
 }
 
-interface UserData{
-  email: string
-  password: string
-  name: string
-}
-
 export const DCard = ({ id }: ICard) => {
   const [email, setEmail ] = useState<string>('')
-  const [userData, setUserData] = useState<null | UserData>()
-
-  useEffect(() => {
-    const getData = async () => {
-      const data: any | UserData = await api
-      setUserData(data)
-    }
-
-    getData()
-  }, [])
-
-  console.log(userData)
 
   return (
     <ChakraProvider>
@@ -39,11 +20,6 @@ export const DCard = ({ id }: ICard) => {
         bg='#73818f'
         textColor='white'
       >
-        {/* 
-        userData === null || userData === undefined ?
-        <h1>Loading...</h1> :
-        <h1>Informações carregadas.</h1>
-        */}
         <>
           <CardHeader>
             <Heading size='lg'>Faça o login</Heading>
