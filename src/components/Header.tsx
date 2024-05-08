@@ -1,6 +1,11 @@
 import { ChakraProvider, Box } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { AppContext } from './AppContext';
 
 export const Header  = () => {
+  const context = useContext(AppContext)
+  console.log('retorno do header', context)
+
   return(
     <ChakraProvider>
       <Box 

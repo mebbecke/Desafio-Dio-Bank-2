@@ -1,58 +1,62 @@
-import { Center, SimpleGrid, Spinner } from "@chakra-ui/react"
-import CardInfo from "../components/CardInfo"
-import { useEffect, useState } from "react"
-import { api } from "../api"
-import { useParams, useNavigate } from "react-router-dom"
+import { Center, SimpleGrid, Spinner } from "@chakra-ui/react";
+import CardInfo from "../components/CardInfo";
+import { useContext, useEffect, useState } from "react";
+import { api } from "../api";
+import { useParams, useNavigate } from "react-router-dom";
+import { AppContext } from "../components/AppContext";
 
-interface UserData{
-    email: string
-    password: string
-    name: string
-    balance: number
-    id: string
+interface UserData {
+  email: string;
+  password: string;
+  name: string;
+  balance: number;
+  id: string;
 }
 
 const Conta = () => {
-    const [userData, setUserData] = useState<null | UserData>()
+  const [userData, setUserData] = useState<null | UserData>();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-      const getData = async () => {
-        const data: any | UserData = await api
-        setUserData(data)
-      }
-  
-      getData()
-    }, [])
+  const { isLoggedIn } = useContext(AppContext);
+  console.log("retorno da pag conta", isLoggedIn);
 
-    const actualData = new Date()
+  !isLoggedIn && navigate("/");
 
-    const { id } = useParams()
-    const navigate = useNavigate()
+  useEffect(() => {
+    const getData = async () => {
+      const data: any | UserData = await api;
+      setUserData(data);
+    };
 
-    if(userData && id !== userData.id){
-        navigate('/')
-    }
-    
-    return(
-        <Center>
-            <SimpleGrid columns={2} spacing={8} paddingTop={16}>
-                {
-                    userData === undefined || userData === null ?
-                    (
-                        <Center>
-                            <Spinner size="xl" color="white"/>
-                        </Center>
-                    ) :
-                    (
-                        <>
-                        <CardInfo mainContent={`Bem vinda ${userData?.name}`} content={`${actualData.getDay()}/${actualData.getMonth()}/${actualData.getFullYear()}, ${actualData.getHours()}:${actualData.getMinutes()}`}/>
-                        <CardInfo mainContent="Saldo" content={`R$ ${userData.balance}`}/>
-                        </>
-                    )
-                }
-            </SimpleGrid>
-        </Center>
-    )
-}
+    getData();
+  }, []);
 
-export default Conta
+  const actualData = new Date();
+
+  if (userData && id !== userData.id) {
+    navigate("/");
+  }
+
+  return (
+    <Center>
+      <SimpleGrid columns={2} spacing={8} paddingTop={16}>
+        {userData === undefined || userData === null ? (
+          <Center>
+            <Spinner size="xl" color="white" />
+          </Center>
+        ) : (
+          <>
+            <CardInfo
+              mainContent={`Bem vinda ${userData?.name}`}
+              content={`${actualData.getDay()}/${actualData.getMonth()}/${actualData.getFullYear()}, ${actualData.getHours()}:${actualData.getMinutes()}`}
+            />
+            <CardInfo mainContent="Saldo" content={`R$ ${userData.balance}`} />
+          </>
+        )}
+      </SimpleGrid>
+    </Center>
+  );
+};
+
+export default Conta;
