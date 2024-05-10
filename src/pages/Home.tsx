@@ -1,47 +1,63 @@
-import { Box, CardBody, CardHeader, Heading, Input } from "@chakra-ui/react"
+import { Box, CardBody, CardHeader, Heading, Input } from "@chakra-ui/react";
 import { DCard } from "../components/Card";
-import { useState } from "react";
+import { MouseEventHandler, useContext, useState } from "react";
 import { DButton } from "../components/Button";
 import { login } from "../services/login";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../components/AppContext";
 
 const Home = () => {
-    const [email, setEmail ] = useState<string>('')
-    return (
-        <Box>
-            <DCard id='login'>
-            <>
+  const [email, setEmail] = useState<string>("");
+  const { setIsLoggedIn } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const validateUser = async (email: string) => {
+    const loggedIn = await login(email);
+
+    if (!loggedIn) {
+      alert("E-mail inválido!");
+    } else {
+      setIsLoggedIn(true);
+      navigate("/conta/1");
+    }
+  };
+
+  return (
+    <Box>
+      <DCard id="login">
+        <>
           <CardHeader>
-            <Heading size='lg'>Faça o login</Heading>
+            <Heading size="lg">Faça o login</Heading>
           </CardHeader>
-          <CardBody justifyContent='center'>
+          <CardBody justifyContent="center">
             <Input
-              color='#73818f'
-              placeholder='E-mail'
+              color="#73818f"
+              placeholder="E-mail"
               _placeholder={{ opacity: 1 }}
-              _focus={{ bg: '#e3e5e8' }}
-              variant='filled'
-              marginBottom='10px'
+              _focus={{ bg: "#e3e5e8" }}
+              variant="filled"
+              marginBottom="10px"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
             <Input
-              color='#73818f'
-              type='password'
-              placeholder='Senha'
+              color="#73818f"
+              type="password"
+              placeholder="Senha"
               _placeholder={{ opacity: 1 }}
-              _focus={{ bg: '#e3e5e8' }}
-              variant='filled'
+              _focus={{ bg: "#e3e5e8" }}
+              variant="filled"
             />
-            <DButton 
-              id='login'
-              onClick={() => login(email)} 
-              text='Entrar' 
+            <DButton
+              id="login"
+              onClick={() => validateUser(email)}
+              text="Entrar"
             />
           </CardBody>
         </>
-            </DCard>
-        </Box>
-    );
-}
+      </DCard>
+    </Box>
+  );
+};
 
 export default Home;

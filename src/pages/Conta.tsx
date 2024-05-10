@@ -19,7 +19,6 @@ const Conta = () => {
   const navigate = useNavigate();
 
   const { isLoggedIn } = useContext(AppContext);
-  console.log("retorno da pag conta", isLoggedIn);
 
   !isLoggedIn && navigate("/");
 

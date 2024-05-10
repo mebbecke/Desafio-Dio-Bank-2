@@ -3,7 +3,7 @@ import { MouseEventHandler } from 'react';
 
 interface IButton {
     id: string,
-    onClick: MouseEventHandler
+    onClick: MouseEventHandler,
     text: string
 }
 
