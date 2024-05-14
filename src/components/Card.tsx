@@ -8,7 +8,6 @@ interface ICard {
 export const DCard = ({ children }: any) => {
 
   return (
-    <ChakraProvider>
       <Card
         boxSize='sm'
         align='center'
@@ -19,6 +18,5 @@ export const DCard = ({ children }: any) => {
         { children }
         
       </Card>
-    </ChakraProvider>
   )
 }

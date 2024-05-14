@@ -1,16 +1,19 @@
-import { Layout } from './components/Layout';
+import { Layout } from "./components/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ChakraProvider } from '@chakra-ui/react';
-import { AppContextProvider } from './components/AppContext';
-import MainRoutes from './routes';
+import { ChakraProvider } from "@chakra-ui/react";
+import { AppContextProvider } from "./components/AppContext";
+import MainRoutes from "./routes";
+import { createLocalStorage, getAllLocalStorage } from "./services/storage";
 
 function App() {
+  !getAllLocalStorage() && createLocalStorage();
+
   return (
     <BrowserRouter>
       <AppContextProvider>
         <ChakraProvider>
           <Layout>
-            <MainRoutes/>
+            <MainRoutes />
           </Layout>
         </ChakraProvider>
       </AppContextProvider>
